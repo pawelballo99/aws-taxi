@@ -9,11 +9,11 @@ os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable """
 
 if __name__ == "__main__":
 
-    #uncomment this if you want run script on local spark(and leave commented if you won't)
+    #uncomment this if you will run script on local spark(and leave commented if you won't)
     """ session = SparkSession.builder.appName("TaxiDataAnalysis").master("local[*]").getOrCreate() """
 
 
-    #uncomment this if you want run script on aws(and leave commented if you won't)
+    #uncomment this if you will run script on aws(and leave commented if you won't)
     """ session = SparkSession.builder.appName("TaxiDataAnalysis").getOrCreate()
     sc = session.sparkContext
     sc.setLogLevel("ERROR") """
@@ -23,7 +23,7 @@ if __name__ == "__main__":
     dataFrameReader = session.read
 
 
-    #uncomment this if you want run script on aws(and leave commented if you won't)
+    #uncomment this if you will run script on aws(and leave commented if you won't)
     """ green2020 = dataFrameReader.option("header", "true").option("inferSchema", value = True).csv("s3://taxi-data-new-york/green_tripdata_2020-05.csv").select("passenger_count", "payment_type")
     green2019 = dataFrameReader.option("header", "true").option("inferSchema", value = True).csv("s3://taxi-data-new-york/green_tripdata_2019-05.csv").select("passenger_count", "payment_type")
     yellow2020 = dataFrameReader.option("header", "true").option("inferSchema", value = True).csv("s3://taxi-data-new-york/yellow_tripdata_2020-05.csv").select("passenger_count", "payment_type")
@@ -31,7 +31,7 @@ if __name__ == "__main__":
      """
     
     
-    #uncomment this if you want run script on local spark(and leave commented if you won't)
+    #uncomment this if you will run script on local spark(and leave commented if you won't)
     """ 
     green2020 = dataFrameReader.option("header", "true").option("inferSchema", value = True).csv("data/green_tripdata_2020-05.csv").select("passenger_count", "payment_type")
     green2019 = dataFrameReader.option("header", "true").option("inferSchema", value = True).csv("data/green_tripdata_2019-05.csv").select("passenger_count", "payment_type")
