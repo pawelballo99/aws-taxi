@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import pandas as pd
+import scipy.stats
 import boto3
 import io
 import os
@@ -31,21 +32,20 @@ def loadData(csvName):
     return dataFrame.filter((dataFrame.payment_type == 1) | (dataFrame.payment_type == 2) | (dataFrame.payment_type == 3) | (dataFrame.payment_type == 4) | (dataFrame.payment_type == 5) | (dataFrame.payment_type == 6))
 
 def createPlot(dataFrame, name):
-    corr = dataFrame.corr("passenger_count", "payment_type")
-    print("Correlation "+ name +": "+ str(corr))
+    
     x = dataFrame.toPandas()["passenger_count"].values.tolist()
     y = dataFrame.toPandas()["payment_type"].values.tolist()
-    fig = plt.figure(figsize = [12, 5])
+    corr = scipy.stats.spearmanr(x, y).correlation
+    plt.figure(figsize = [12, 5])
+    plt.suptitle(name+"\nCorrelation: "+ str(round(corr,4)), fontsize=14)
     plt.subplot(1, 2, 1)
     sns.regplot(x = x, y = y, fit_reg = False,
             x_jitter = 0.1, y_jitter = 0.1, scatter_kws = {'alpha' : 1/3})
     plt.ylabel("Passenger Count")
     plt.xlabel("Payment Type")
     plt.subplot(1, 2, 2)
-    bins_x = np.arange(-0.5, 9.5, 1)
-    bins_y = np.arange(0.5, 6.5, 1)
     plt.hist2d( x =x, y = y,
-            bins = [bins_x, bins_y])
+            bins = [np.arange(-0.5, 9.5, 1), np.arange(0.5, 6.5, 1)])
     plt.colorbar()
     plt.ylabel("Passenger Count")
     plt.xlabel("Payment Type")
@@ -78,14 +78,14 @@ if __name__ == "__main__":
     all_pcpt = yellow_pcpt.union(green_pcpt)
 
     #creating and saving plots
-    createPlot(green2019, "green2019")
-    createPlot(green2020, "green2020")
-    createPlot(yellow2020, "yellow2020")
-    createPlot(yellow2019, "yellow2019")
-    createPlot(pcpt_2020, "pcpt_2020")
-    createPlot(pcpt_2019, "pcpt_2019")
-    createPlot(yellow_pcpt, "yellow_pcpt")
-    createPlot(green_pcpt, "green_pcpt")
-    createPlot(all_pcpt, "all_pcpt")
+    createPlot(green2019, "Green taxis in May 2019")
+    createPlot(green2020, "Green taxis in May 2020")
+    createPlot(yellow2020, "Yellow taxis in May 2020")
+    createPlot(yellow2019, "Yellow taxis in May 2019")
+    createPlot(pcpt_2020, "All taxis in May 2020")
+    createPlot(pcpt_2019, "All taxis in May 2019")
+    createPlot(yellow_pcpt, "Yellow taxis in May 2019 and 2020")
+    createPlot(green_pcpt, "Green taxis in May 2019 and 2020")
+    createPlot(all_pcpt, "All taxis in May 2019 and 2020")
 
     session.stop()
