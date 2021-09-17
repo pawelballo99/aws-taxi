@@ -41,14 +41,14 @@ def createPlot(dataFrame, name):
     plt.subplot(1, 2, 1)
     sns.regplot(x = x, y = y, fit_reg = False,
             x_jitter = 0.1, y_jitter = 0.1, scatter_kws = {'alpha' : 1/3})
-    plt.ylabel("Passenger Count")
-    plt.xlabel("Payment Type")
+    plt.xlabel("Passenger Count")
+    plt.ylabel("Payment Type")
     plt.subplot(1, 2, 2)
     plt.hist2d( x =x, y = y,
-            bins = [np.arange(-0.5, 9.5, 1), np.arange(0.5, 6.5, 1)])
+            bins = [np.arange(-0.5, 9.5 + 1, 1), np.arange(0.5, 6.5 + 1, 1)])
     plt.colorbar()
-    plt.ylabel("Passenger Count")
-    plt.xlabel("Payment Type")
+    plt.xlabel("Passenger Count")
+    plt.ylabel("Payment Type")
 
     if (not localSpark):
         img_data = io.BytesIO()
