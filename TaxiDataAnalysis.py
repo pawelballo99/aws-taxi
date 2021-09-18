@@ -8,6 +8,7 @@ import pandas as pd
 import scipy.stats
 import boto3
 import io
+import time
 import os
 import sys
 
@@ -19,6 +20,7 @@ localSpark = False
 LOCAL_PATH = 'data/'
 S3_PATH = 's3://taxi-data-new-york/'
 
+start = time.time()
 session = SparkSession.builder.appName("TaxiDataAnalysis").master("local[*]").getOrCreate() if localSpark else SparkSession.builder.appName("TaxiDataAnalysis").getOrCreate() 
 sc = session.sparkContext
 sc.setLogLevel("ERROR")
@@ -88,4 +90,6 @@ if __name__ == "__main__":
     createPlot(green_pcpt, "Green taxis in May 2019 and 2020")
     createPlot(all_pcpt, "All taxis in May 2019 and 2020")
 
+    end = time.time()
+    print("Time: "+ str(end - start))
     session.stop()
