@@ -36,10 +36,10 @@ EMR \
 s3
 
 ### Report
-The main problems in the project was additional installation of libraries because we had to update pip first. 
+The main problems in the project was additional installation of libraries because we had to update pip first. \
 
-![clusterConfig](./Assets/clusterConfig.png)
+![clusterConfig](./Assets/clusterConfig.png) \
 It is aws configure which we used
 
-![s3Content](./Assets/s3Content.png)
+![s3Content](./Assets/s3Content.png) \ 
 It is s3 content which we used to run our project
