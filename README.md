@@ -17,7 +17,7 @@ All charts are created by cluster and then stored in s3 in png format.
 
 ### Example
 ![ExampleChart](./Assets/242089473_1784395795097112_5840287843245164300_n.png)
-**Chart description**
+**Chart description** \
 **Passenger count** - the number of passengers in the vehicle. \
 **Payment Type** - a numeric code signifying how the passenger paid for the trip. \
 1 = Credit card \
@@ -36,10 +36,10 @@ EMR \
 s3
 
 ### Report
-The main problems in the project was additional installation of libraries because we had to update pip first. \
+The main problems in the project was additional installation of libraries because we had to update pip first. 
 
 ![clusterConfig](./Assets/clusterConfig.png) \
 It is aws configure which we used
 
-![s3Content](./Assets/s3Content.png) \ 
+![s3Content](./Assets/s3Content.png) \
 It is s3 content which we used to run our project
